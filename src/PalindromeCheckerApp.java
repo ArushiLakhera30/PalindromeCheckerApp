@@ -1,31 +1,27 @@
 import java.util.Scanner;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         // Hardcoded string to check
-        String text = "radar";
+        String text = "rotor";
 
         // Clean the string: remove spaces and make lowercase
         String cleaned = text.replaceAll("\\s+", "").toLowerCase();
 
-        // Create a stack and a queue
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
-
-        // Push and enqueue all characters
+        // Load characters into a Deque
+        Deque<Character> deque = new ArrayDeque<>();
         for (char c : cleaned.toCharArray()) {
-            stack.push(c);   // LIFO
-            queue.add(c);    // FIFO
+            deque.add(c);
         }
 
         boolean isPalindrome = true;
 
-        // Compare characters popped from stack and dequeued from queue
-        while (!stack.isEmpty() && !queue.isEmpty()) {
-            if (stack.pop() != queue.remove()) {
+        // Compare characters from both ends
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
                 isPalindrome = false;
                 break;
             }
@@ -38,4 +34,5 @@ public class PalindromeCheckerApp {
             System.out.println("\"" + text + "\" is not a palindrome.");
         }
     }
+
 }
