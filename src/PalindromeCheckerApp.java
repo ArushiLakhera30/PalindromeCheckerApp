@@ -1,35 +1,32 @@
 import java.util.Scanner;
-
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        // Hardcoded string to check
-        String text = "racecar";
+    public class PalindromeUsingStack {
 
-        // Clean the string: remove spaces and make lowercase
-        String cleaned = text.replaceAll("\\s+", "").toLowerCase();
+        public static void main(String[] args) {
+            // Hardcoded string to check
+            String text = "level";
 
-        // Convert to character array
-        char[] chars = cleaned.toCharArray();
+            // Clean the string: remove spaces and make lowercase
+            String cleaned = text.replaceAll("\\s+", "").toLowerCase();
 
-        boolean isPalindrome = true;
-        int left = 0;
-        int right = chars.length - 1;
-
-        while (left < right) {
-            if (chars[left] != chars[right]) {
-                isPalindrome = false;
-                break;
+            // Create a stack and push all characters
+            Stack<Character> stack = new Stack<>();
+            for (char c : cleaned.toCharArray()) {
+                stack.push(c);
             }
-            left++;
-            right--;
+
+            // Build reversed string by popping from stack
+            StringBuilder reversed = new StringBuilder();
+            while (!stack.isEmpty()) {
+                reversed.append(stack.pop());
+            }
+
+            // Compare original and reversed
+            if (cleaned.equals(reversed.toString())) {
+                System.out.println("\"" + text + "\" is a palindrome!");
+            } else {
+                System.out.println("\"" + text + "\" is not a palindrome.");
+            }
         }
 
-        // Output result
-        if (isPalindrome) {
-            System.out.println("\"" + text + "\" is a palindrome!");
-        } else {
-            System.out.println("\"" + text + "\" is not a palindrome.");
-        }
     }
-
-}
